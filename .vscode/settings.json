@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "celulalista.h": "c"
+        "celulalista.h": "c",
+        "datastruct.h": "c",
+        "produtostruct.h": "c"
     }
 }
