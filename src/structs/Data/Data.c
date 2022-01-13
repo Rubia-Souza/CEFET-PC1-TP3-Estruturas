@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "DataStruct.h"
 
 void setDia(Data* data, const unsigned int dia) {
@@ -34,4 +35,20 @@ char* dataAsString(const Data data) {
 
     sprintf(dataString, template, data.dia, data.mes, data.ano);
     return dataString;
+}
+
+bool dataEhValida(const Data data) {
+    return (diaEhValido(data.dia) && mesEhValido(data.mes) && anoEhValido(data.ano));
+}
+
+bool diaEhValido(const unsigned int dia) {
+    return (dia >= 1 || dia <= 31);
+}
+
+bool mesEhValido(const unsigned int mes) {
+    return (mes >= 1 || mes <= 12);
+}
+
+bool anoEhValido(const unsigned int ano) {
+    return (ano > 0);
 }

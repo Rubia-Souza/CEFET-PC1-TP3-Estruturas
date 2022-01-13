@@ -1,6 +1,23 @@
 #ifndef DATA_H
 #define DATA_H
 
+#include <stdbool.h>
+
+enum Meses {
+    Janeiro = 1,
+    Fevereiro = 2,
+    Marco = 3,
+    Abril = 4,
+    Maio = 5,
+    Junho = 6,
+    Julho = 7,
+    Agosto = 8,
+    Setembro = 9,
+    Outubro = 10,
+    Novembro = 11,
+    Dezembro = 12,
+} Meses;
+
 typedef struct Data {
     unsigned int dia;
     unsigned int mes;
@@ -13,5 +30,10 @@ void setAno(Data* data, const unsigned int ano);
 
 Data buildDataVazia();
 char* dataAsString(const Data data);
+
+bool dataEhValida(const Data data);
+bool diaEhValido(const unsigned int dia);
+bool mesEhValido(const unsigned int mes);
+bool anoEhValido(const unsigned int ano);
 
 #endif
