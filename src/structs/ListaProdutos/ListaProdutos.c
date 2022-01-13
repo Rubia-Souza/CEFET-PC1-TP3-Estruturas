@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
@@ -48,20 +49,84 @@ void adicionarComeco(ListaProdutos* lista, const Produto produto) {
     return;
 }
 
-void adicionarAntesProduto(ListaProdutos* lista, const unsigned int codigoProduto) {
+void adicionarAntesProduto(ListaProdutos* lista, const unsigned int codigoProduto, const Produto produto) {
+    if(estaVazia(lista)) {
+        return;
+    }
 
+    Celula* novaCelula = newCelula(produto);
+    Celula* produtoReferencia = getCelulaPorCodigoProduto(lista, codigoProduto);
+
+    Celula* anteriorAReferencia = produtoReferencia->anterior;
+
+    novaCelula->anterior = anteriorAReferencia;
+    anteriorAReferencia->proxima = novaCelula;
+
+    novaCelula->proxima = produtoReferencia;
+    produtoReferencia->anterior = novaCelula;
+    
+    lista->tamanho++;
+    return;
 }
 
-void adicionarAntesIndex(ListaProdutos* lista, const unsigned int index) {
+void adicionarAntesIndex(ListaProdutos* lista, const unsigned int index, const Produto produto) {
+    if(estaVazia(lista)) {
+        return;
+    }
+    
+    Celula* novaCelula = newCelulaComValor(produto);
+    Celula* produtoReferencia = getCelulaEm(lista, index);
 
+    Celula* anteriorAReferencia = produtoReferencia->anterior;
+
+    novaCelula->anterior = anteriorAReferencia;
+    anteriorAReferencia->proxima = novaCelula;
+
+    novaCelula->proxima = produtoReferencia;
+    produtoReferencia->anterior = novaCelula;
+
+    lista->tamanho++;
+    return;
 }
 
-void adicionarAposProduto(ListaProdutos* lista, const unsigned int codigoProduto) {
+void adicionarAposProduto(ListaProdutos* lista, const unsigned int codigoProduto, const Produto produto) {
+    if(estaVazia(lista)) {
+        return;
+    }
 
+    Celula* novaCelula = newCelulaComValor(produto);
+    Celula* produtoReferencia = getCelulaPorCodigoProduto(lista, codigoProduto);
+
+    Celula* posteriorReferencia = produtoReferencia->proxima;
+
+    novaCelula->proxima = posteriorReferencia;
+    posteriorReferencia->anterior = novaCelula;
+
+    novaCelula->anterior = produtoReferencia;
+    produtoReferencia->proxima = novaCelula;
+
+    lista->tamanho++;
+    return;
 }
 
-void adicionarAposIndex(ListaProdutos* lista, const unsigned int index) {
+void adicionarAposIndex(ListaProdutos* lista, const unsigned int index, const Produto produto) {
+    if(estaVazia(lista)) {
+        return;
+    }
 
+    Celula* novaCelula = newCelulaComValor(produto);
+    Celula* produtoReferencia = getCelulaEm(lista, index);
+
+    Celula* posteriorReferencia = produtoReferencia->proxima;
+
+    novaCelula->proxima = posteriorReferencia;
+    posteriorReferencia->anterior = novaCelula;
+
+    novaCelula->anterior = produtoReferencia;
+    produtoReferencia->proxima = novaCelula;
+
+    lista->tamanho++;
+    return;
 }
 
 void removerPrimeiro(ListaProdutos* lista) {
@@ -310,7 +375,7 @@ Celula* getCelulaPorCodigoProduto(const ListaProdutos* lista, const unsigned int
 }
 
 Celula* getCelulaEm(const ListaProdutos* lista, const unsigned int index) {
-    if(estaVazia(lista) || index >= lista->tamanho) {
+    if(index < 0 || index >= lista->tamanho) {
         return NULL;
     }
 

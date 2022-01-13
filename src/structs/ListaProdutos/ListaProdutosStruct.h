@@ -16,10 +16,10 @@ ListaProdutos* newListaProdutos();
 
 void adicionarFim(ListaProdutos* lista, const Produto produto);
 void adicionarComeco(ListaProdutos* lista, const Produto produto);
-void adicionarAntesProduto(ListaProdutos* lista, const unsigned int codigoProduto);
-void adicionarAntesIndex(ListaProdutos* lista, const unsigned int index);
-void adicionarAposProduto(ListaProdutos* lista, const unsigned int codigoProduto);
-void adicionarAposIndex(ListaProdutos* lista, const unsigned int index);
+void adicionarAntesProduto(ListaProdutos* lista, const unsigned int codigoProduto, const Produto produto);
+void adicionarAntesIndex(ListaProdutos* lista, const unsigned int index, const Produto produto);
+void adicionarAposProduto(ListaProdutos* lista, const unsigned int codigoProduto, const Produto produto);
+void adicionarAposIndex(ListaProdutos* lista, const unsigned int index, const Produto produto);
 
 void removerPrimeiro(ListaProdutos* lista);
 void removerUltimo(ListaProdutos* lista);
