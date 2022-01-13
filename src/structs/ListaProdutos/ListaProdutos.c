@@ -2,30 +2,28 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "ListaProdutos.h"
+#include "../Produto/ProdutoStruct.h"
+#include "ListaProdutosStruct.h"
 
-ListaProdutos* getTodasCelulaComNome(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]);
-ListaProdutos* getTodasCelulaComCodigo(const ListaProdutos* lista, const unsigned int codigo);
+void setRefFinal(ListaProdutos* lista, Celula* item);
+void setRefInicial(ListaProdutos* lista, Celula* item);
 
-Celula* getCelulaPorNome(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]);
-Celula* getCelulaPorCodigo(const ListaProdutos* lista, const unsigned int codigo);
+Celula* getCelulaInicial(const ListaProdutos* lista);
+Celula* getCelulaFinal(const ListaProdutos* lista);
+Celula* getCelulaPorNomeProduto(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]);
+Celula* getCelulaPorCodigoProduto(const ListaProdutos* lista, const unsigned int codigo);
 Celula* getCelulaEm(const ListaProdutos* lista, const unsigned int index);
 
-void removerItem(Celula* alvo);
+void removerCelula(Celula* alvo);
 
 ListaProdutos* newListaProdutos() {
-
+    // TODO: Implementar
 }
 
 void adicionarFim(ListaProdutos* lista, const Produto produto) {
     Celula* novaCelula = newCelulaComValor(produto);
-    Celula* finalAntigo = lista->final;
     
-    novaCelula->anterior = finalAntigo;
-    novaCelula->proxima = NULL;
-
-    finalAntigo->proxima = novaCelula;
-    lista->final = novaCelula;
+    setRefFinal(lista, novaCelula);
     lista->tamanho++;
 
     return;
@@ -33,46 +31,49 @@ void adicionarFim(ListaProdutos* lista, const Produto produto) {
 
 void adicionarComeco(ListaProdutos* lista, const Produto produto) {
     Celula* novaCelula = newCelulaComValor(produto);
-    Celula* comecoAntigo = lista->comeco;
-
-    novaCelula->anterior = NULL;
-    novaCelula->proxima = comecoAntigo;
-
-    comecoAntigo->anterior = novaCelula;
-    lista->comeco = novaCelula;
+    
+    setRefInicial(lista, novaCelula);
     lista->tamanho++;
 
     return;
 }
 
+void adicionarAntesProduto(ListaProdutos* lista, const unsigned int codigoProduto) {
+
+}
+
+void adicionarAntesIndex(ListaProdutos* lista, const unsigned int index) {
+
+}
+
+void adicionarAposProduto(ListaProdutos* lista, const unsigned int codigoProduto) {
+
+}
+
+void adicionarAposIndex(ListaProdutos* lista, const unsigned int index) {
+
+}
+
 void removerPrimeiro(ListaProdutos* lista) {
-    Celula* celulaRemovida = lista->comeco;
+    Celula* celulaRemovida = getCelulaInicial(lista);
     Celula* novoComeco = celulaRemovida->proxima;
-    Produto produtoRemovido = celulaRemovida->produto;
-
-    novoComeco->anterior = NULL;
-    celulaRemovida->proxima = NULL;
+    
+    setRefInicial(lista, novoComeco);
     free(celulaRemovida);
-
-    lista->comeco = novoComeco;
     lista->tamanho--;
 
-    return produtoRemovido; // TODO: Perigo de error
+    return;
 }
 
 void removerUltimo(ListaProdutos* lista) {
-    Celula* celulaRemovida = lista->final;
+    Celula* celulaRemovida = getCelulaFinal(lista);
     Celula* novoFim = celulaRemovida->anterior;
-    Produto produtoRemovido = celulaRemovida->produto;
 
-    celulaRemovida->anterior = NULL;
-    novoFim->proxima = NULL;
+    setRefFinal(lista, celulaRemovida);
     free(celulaRemovida);
-
-    lista->final = novoFim;
     lista->tamanho--;
 
-    return produtoRemovido; // TODO: Perigo de error
+    return;
 }
 
 void removerEm(ListaProdutos* lista, const unsigned int index) {
@@ -80,34 +81,58 @@ void removerEm(ListaProdutos* lista, const unsigned int index) {
         return;
     }
 
-    Celula* celulaRemovida = getProdutoEm(lista, index);
-    Celula* alvo;
-    for(int i = 0; i < index && i < lista->tamanho; i++) {
-        alvo = alvo->proxima;
-    }
+    Celula* celulaRemovida = getCelulaEm(lista, index);
 
-    Produto produtoRemovido = alvo->produto;
-    removerItem(alvo);
-    free(alvo);
+    removerCelula(celulaRemovida);
     lista->tamanho--;
 
-    return produtoRemovido; // TODO: Perigo de error
+    return;
 }
 
-void removerProdutoPorNome(ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]) {
-    //ListaProdutos produtosRemovidos;
-    for(Celula* item = lista->comeco->proxima; item != lista->final; item = item->proxima) {
-        bool ehProduto = strcmp(item->produto.nome, nome);
-        if(ehProduto) {
-            removerItem(item);
-            free(item);
+void removerTodosProdutosComNome(ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]) {
+    for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = item->proxima) {
+        bool produtoTemNomeIgual = strcmp(item->produto.nome, nome);
+        if(produtoTemNomeIgual) {
+            removerCelula(item);
             lista->tamanho--;
         }
     }
 }
 
-ListaProdutos getTodosProdutosComNome(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]);
-ListaProdutos getTodosProdutosComCodigo(const ListaProdutos* lista, const unsigned int codigo);
+Produto getProdutoInicial(const ListaProdutos* lista) {
+    Celula* primeiroValor = getCelulaInicial(lista);
+    return primeiroValor->produto;
+}
+
+Produto getProdutoFinal(const ListaProdutos* lista) {
+    Celula* ultimoValor = getCelulaFinal(lista);
+    return ultimoValor->produto;
+}
+
+ListaProdutos* getTodosProdutosComNome(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]) {
+    ListaProdutos* produtos = newListaProdutos();
+
+    for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = item->proxima) {
+        bool produtoTemNomeIgual = strcmp(item->produto.nome, nome);
+        if(produtoTemNomeIgual) {
+            adicionarFim(produtos, item->produto);
+        }
+    }
+
+    return produtos;
+}
+
+ListaProdutos* getTodosProdutosComCodigo(const ListaProdutos* lista, const unsigned int codigo) {
+    ListaProdutos* produtos = newListaProdutos();
+
+    for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = item->proxima) {
+        if(item->produto.codigo == codigo) {
+            adicionarFim(produtos, item->produto);
+        }
+    }
+
+    return produtos;
+}
 
 Produto getProdutoPorCodigo(ListaProdutos* lista, const unsigned int codigo){ 
     Celula* alvo = getCelulaPorCodigoProduto(lista, codigo);
@@ -115,7 +140,7 @@ Produto getProdutoPorCodigo(ListaProdutos* lista, const unsigned int codigo){
 }
 
 Produto getProdutoPorNome(ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]) {
-    Celula* alvo = getCelulaPorNome(lista, nome);
+    Celula* alvo = getCelulaPorNomeProduto(lista, nome);
     return alvo->produto;
 }
 
@@ -125,18 +150,20 @@ Produto getProdutoEm(ListaProdutos* lista, const unsigned int index) {
 }
 
 void limpar(ListaProdutos* lista) {
-    Celula* primeira = lista->comeco;
-    Celula* ultima = lista->final;
+    Celula* refComeco = lista->refComeco;
+    Celula* refFinal = lista->refFinal;
 
-    for(Celula* item = lista->comeco->proxima; item != lista->final; item = item->proxima->proxima) {
+    Celula* refProximoItem;
+    for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = refProximoItem) {
+        refProximoItem = item->proxima;
         free(item);
     }
 
-    primeira->anterior = NULL;
-    primeira->proxima = ultima;
+    refComeco->anterior = NULL;
+    refComeco->proxima = refFinal;
 
-    ultima->anterior = primeira;
-    ultima->proxima = NULL;
+    refFinal->anterior = refComeco;
+    refFinal->proxima = NULL;
 
     lista->tamanho = 0;
 
@@ -144,41 +171,54 @@ void limpar(ListaProdutos* lista) {
 }
 
 bool estaVazia(const ListaProdutos* lista) {
-    Celula* primeira = lista->comeco;
-    Celula* ultima = lista->final;
+    Celula* refComeco = lista->refComeco;
+    Celula* refFinal = lista->refFinal;
 
-    return (primeira->proxima == ultima && ultima->anterior == primeira);
+    return (refComeco->proxima == refFinal && refFinal->anterior == refComeco);
 }
 
-ListaProdutos* getTodasCelulaComNome(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]){
-    ListaProdutos* produtos = newListaProdutos();
-
-    for(Celula* item = lista->comeco->proxima; item != lista->final; item = item->proxima) {
-        bool ehProduto = strcmp(item->produto.nome, nome);
-        if(ehProduto) {
-            adicionarFim(produtos, item->produto);
-        }
+void setRefFinal(ListaProdutos* lista, Celula* item) {
+    if(item == NULL) {
+        return;
     }
 
-    return produtos;
+    Celula* finalAnterior = getCelulaFinal(lista);
+    finalAnterior->proxima = item;
+
+    item->anterior = finalAnterior;
+    item->proxima = lista->refFinal;
+
+    lista->refFinal->anterior = item;
+    return;
 }
 
-ListaProdutos* getTodasCelulaComCodigo(const ListaProdutos* lista, const unsigned int codigo) {
-    ListaProdutos* produtos = newListaProdutos();
-
-    for(Celula* item = lista->comeco->proxima; item != lista->final; item = item->proxima) {
-        if(item->produto.codigo == codigo) {
-            adicionarFim(produtos, item->produto);
-        }
+void setRefInicial(ListaProdutos* lista, Celula* item) {
+    if(item == NULL) {
+        return;
     }
 
-    return produtos;
+    Celula* comecoAnteriror = getCelulaInicial(lista);
+    comecoAnteriror->anterior = item;
+
+    item->proxima = comecoAnteriror;
+    item->anterior = lista->refComeco;
+
+    lista->refComeco->proxima = item;
+    return;
+}
+
+Celula* getCelulaInicial(const ListaProdutos* lista) {
+    return lista->refComeco->proxima;
+}
+
+Celula* getCelulaFinal(const ListaProdutos* lista) {
+    return lista->refFinal->anterior;
 }
 
 Celula* getCelulaPorNomeProduto(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]) {
-    for(Celula* item = lista->comeco->proxima; item != lista->final; item = item->proxima) {
-        bool ehProduto = strcmp(item->produto.nome, nome);
-        if(ehProduto) {
+    for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = item->proxima) {
+        bool produtoTemNomeIgual = strcmp(item->produto.nome, nome);
+        if(produtoTemNomeIgual) {
             return item;
         }
     }
@@ -187,7 +227,7 @@ Celula* getCelulaPorNomeProduto(const ListaProdutos* lista, const char nome[TAMA
 }
 
 Celula* getCelulaPorCodigoProduto(const ListaProdutos* lista, const unsigned int codigo) {
-    for(Celula* item = lista->comeco->proxima; item != lista->final; item = item->proxima) {
+    for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = item->proxima) {
         if(item->produto.codigo == codigo) {
             return item;
         }
@@ -201,7 +241,7 @@ Celula* getCelulaEm(const ListaProdutos* lista, const unsigned int index) {
         return NULL;
     }
 
-    Celula* alvo;
+    Celula* alvo = NULL;
     for(int i = 0; i < index && i < lista->tamanho; i++) {
         alvo = alvo->proxima;
     }
@@ -209,12 +249,13 @@ Celula* getCelulaEm(const ListaProdutos* lista, const unsigned int index) {
     return alvo;
 }
 
-void removerItem(Celula* alvo) {
-    Celula* anterior = alvo->anterior;
-    Celula* proxima = alvo->proxima;
+void removerCelula(Celula* alvo) {
+    Celula* anteriorAoAlvo = alvo->anterior;
+    Celula* proximaAoAlvo = alvo->proxima;
 
-    anterior->proxima = proxima;
-    proxima->anterior = anterior;
+    anteriorAoAlvo->proxima = proximaAoAlvo;
+    proximaAoAlvo->anterior = anteriorAoAlvo;
 
+    free(alvo);
     return;
 }
