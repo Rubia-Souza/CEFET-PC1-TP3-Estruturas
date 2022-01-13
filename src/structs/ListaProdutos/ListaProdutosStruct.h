@@ -29,7 +29,6 @@ void removerTodosProdutosComNome(ListaProdutos* lista, const char nome[TAMANHO_N
 Produto getProdutoInicial(const ListaProdutos* lista);
 Produto getProdutoFinal(const ListaProdutos* lista);
 ListaProdutos* getTodosProdutosComNome(const ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]);
-ListaProdutos* getTodosProdutosComCodigo(const ListaProdutos* lista, const unsigned int codigo);
 Produto getProdutoPorCodigo(ListaProdutos* lista, const unsigned int codigo);
 Produto getProdutoPorNome(ListaProdutos* lista, const char nome[TAMANHO_NOME_PRODUTO]);
 Produto getProdutoEm(ListaProdutos* lista, const unsigned int index);
