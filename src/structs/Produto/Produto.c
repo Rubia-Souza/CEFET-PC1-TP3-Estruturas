@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "../Data/DataStruct.h"
@@ -22,4 +24,24 @@ void setValidade(Produto* produto, const Data validade) {
     setDia(&produto->validade, validade.dia);
     setMes(&produto->validade, validade.mes);
     setAno(&produto->validade, validade.ano);
+}
+
+Produto buildProdutoVazio() {
+    Produto vazio;
+    setCodigo(&vazio, 0);
+    setNome(&vazio, "");
+    setPreco(&vazio, 0);
+    setValidade(&vazio, buildDataVazia());
+
+    return vazio;
+}
+
+char* produtoAsString(const Produto produto) {
+    const char template[] = "Produto: %s, com código: %d. Preço: %f - Validade: %s.";
+    const int tamanho = sizeof(template);
+
+    char* produtoString = (char*) malloc(tamanho * sizeof(char));
+    sprintf(produtoString, template, produto.nome, produto.codigo, produto.preco, dataAsString(produto.validade));
+    
+    return produtoString;
 }

@@ -12,9 +12,12 @@ typedef struct Produto {
     Data validade;
 } Produto;
 
-void setCodigo(Produto *produto, const unsigned int codigo);
-void setNome(Produto *produto, const char nome[TAMANHO_NOME_PRODUTO]);
-void setPreco(Produto *produto, const float preco);
-void setValidade(Produto *produto, const Data validade);
+void setCodigo(Produto* produto, const unsigned int codigo);
+void setNome(Produto* produto, const char nome[TAMANHO_NOME_PRODUTO]);
+void setPreco(Produto* produto, const float preco);
+void setValidade(Produto* produto, const Data validade);
+
+Produto buildProdutoVazio();
+char* produtoAsString(const Produto produto);
 
 #endif
