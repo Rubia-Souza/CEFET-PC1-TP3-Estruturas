@@ -8,6 +8,11 @@
 char* getNomeProdutosAlvo();
 
 void excluirProdutos(ListaProdutos* lista) {
+    if(estaVazia(lista)) {
+        printf("\nNão há nenhum produto cadastrado");
+        return;
+    }
+
     char* nome = getNomeProdutosAlvo();
 
     ListaProdutos* produtosDevemSerExcluidos = getTodosProdutosComNome(lista, nome);
@@ -17,8 +22,8 @@ void excluirProdutos(ListaProdutos* lista) {
     }
 
     removerTodosProdutosComNome(lista, nome);
-    printf("\nProdutos que foram excluidos:\n");
-    renderizarListaProdutos(produtosDevemSerExcluidos); // TODO: Possível erro
+    printf("\n---- Produtos que foram excluidos:\n");
+    renderizarListaProdutos(produtosDevemSerExcluidos); // TODO: Erro lista o header - Criar uma função que printa a lista
 
     destruir(produtosDevemSerExcluidos);
     return;

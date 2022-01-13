@@ -10,7 +10,7 @@ void renderizarOpcoes();
 unsigned int getOpcao();
 
 unsigned int renderizarMenu() {
-    printf("===== Rúbia Alice - Produtos =====\n\n");
+    printf("\n===== Rúbia Alice - Produtos =====\n\n");
     
     renderizarOpcoes();
     unsigned int escolha = getOpcao();
@@ -26,7 +26,6 @@ void renderizarOpcoes() {
     printf("[5] Excluir produto\n");
     printf("[6] Ordernar produtos\n");
     printf("[7] Sair\n");
-    printf("\n");
 
     return;
 }

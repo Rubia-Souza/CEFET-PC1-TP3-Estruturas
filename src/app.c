@@ -29,6 +29,8 @@ int main() {
     addTest(produtos);
 
     while (opcaoEscolhida != 7) {
+        opcaoEscolhida = renderizarMenu();
+
         switch (opcaoEscolhida) {
             case ADICIONAR:
                 casoAdicionar(produtos);
@@ -114,10 +116,10 @@ void addTest(ListaProdutos* listinha) {
         setValidade(&teste3, dataTeste3);
 
         if(i%2 == 0) {
-            adicionarAntesIndex(listinha, 0, teste3);
+            adicionarComeco(listinha, teste3);
         }
         else {
-            adicionarAposIndex(listinha, listinha->tamanho - 1, teste3);
+            adicionarFim(listinha, teste3);
         }
     }
 }

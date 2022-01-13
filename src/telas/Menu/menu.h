@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-enum OpcoesMenu {
+typedef enum OpcoesMenu {
     ADICIONAR = 1,
     EXIBIR_TODOS_PRODUTOS = 2,
     EXIBIR_PRODUTO_CARO = 3,

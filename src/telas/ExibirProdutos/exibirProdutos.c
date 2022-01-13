@@ -5,7 +5,12 @@
 #include "../../structs/ListaProdutos/ListaProdutosStruct.h"
 
 void renderizarListaProdutos(const ListaProdutos* lista) {
-    printf("\n---- Lista de todos produtos cadastrados: ");
+    if(estaVazia(lista)) {
+        printf("\nNão há nenhum produto cadastrado");
+        return;
+    }
+
+    printf("\n---- Lista de todos produtos cadastrados:\n");
 
     int contador = 1;
     for(Celula* item = lista->refComeco->proxima; item != lista->refFinal; item = item->proxima) {
@@ -18,6 +23,11 @@ void renderizarListaProdutos(const ListaProdutos* lista) {
 }
 
 void exibirProdutoMaisCaro(const ListaProdutos* lista) {
+    if(estaVazia(lista)) {
+        printf("\nNão há nenhum produto cadastrado");
+        return;
+    }
+
     Produto produtoCaro = buildProdutoVazio();
 
     for(Celula* item = lista->refComeco->proxima; item != lista->refFinal; item = item->proxima) {
@@ -27,12 +37,17 @@ void exibirProdutoMaisCaro(const ListaProdutos* lista) {
         }
     }
 
-    printf("\nProduto mais caro:\n");
+    printf("\n---- Produto mais caro:\n");
     printf("%s", produtoAsString(produtoCaro));
     return;
 }
 
-void exibirProdutoMaisBarato(const ListaProdutos* lista) {
+void exibirProdutoMaisBarato(const ListaProdutos* lista) { // TODO: Erro produto vazio preço zero
+    if(estaVazia(lista)) {
+        printf("\nNão há nenhum produto cadastrado");
+        return;
+    }
+
     Produto produtoBarato = buildProdutoVazio();
 
     for(Celula* item = lista->refComeco->proxima; item != lista->refFinal; item = item->proxima) {
@@ -42,7 +57,7 @@ void exibirProdutoMaisBarato(const ListaProdutos* lista) {
         }
     }
 
-    printf("\nProduto mais barato:\n");
+    printf("\n---- Produto mais barato:\n");
     printf("%s", produtoAsString(produtoBarato));
     return;
 }

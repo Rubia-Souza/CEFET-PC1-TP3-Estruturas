@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-enum Meses {
+typedef enum Meses {
     Janeiro = 1,
     Fevereiro = 2,
     Marco = 3,
