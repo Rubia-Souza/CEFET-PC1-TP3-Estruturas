@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./structs/Produto/Produto.h"
+#include "./structs/Produto/ProdutoStruct.h"
 
 int main() {
 
@@ -15,7 +15,7 @@ int main() {
     setAno(&validade, 2001);
     setValidade(&teste, validade);
 
-    printf("Codigo: %d", teste.codigo);
+    printf("Codigo: %d\n", teste.codigo);
     printf("Nome: %s\n", teste.nome);
     printf("Preco: %f\n", teste.preco);
     printf("Dia: %d\n", teste.validade.dia);
