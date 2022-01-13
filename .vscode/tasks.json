@@ -11,6 +11,10 @@
                 "${fileDirname}\\structs\\Data\\*.c",
                 "${fileDirname}\\structs\\Produto\\*.h",
                 "${fileDirname}\\structs\\Produto\\*.c",
+                "${fileDirname}\\structs\\ListaProdutos\\*.h",
+                "${fileDirname}\\structs\\ListaProdutos\\*.c",
+                "${fileDirname}\\structs\\ListaProdutos\\CelulaLista\\*.h",
+                "${fileDirname}\\structs\\ListaProdutos\\CelulaLista\\*.c",
                 "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
