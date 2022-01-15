@@ -41,7 +41,7 @@ unsigned int getOpcao() {
 
         inputErrado = opcao < OPCAO_MENU_MINIMA || opcao > OPCAO_MENU_MAXIMA;
         if(inputErrado) {
-            printf("\nPor favor, escolha uma opção válida (de 1 a 6): ");
+            printf("\nPor favor, escolha uma opção válida (de %d a %d): ", OPCAO_MENU_MINIMA, OPCAO_MENU_MAXIMA);
         }
     } while(inputErrado);
     
