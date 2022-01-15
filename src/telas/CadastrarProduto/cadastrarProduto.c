@@ -49,8 +49,9 @@ char* getNomeProduto() {
     char* nomeProduto = (char*) malloc(TAMANHO_NOME_PRODUTO * sizeof(char));
 
     printf("\nInforme o nome do produto: ");
-    scanf("%50s", nomeProduto);
+    fgets(nomeProduto, TAMANHO_NOME_PRODUTO, stdin);
     fflush(stdin);
+    nomeProduto[strcspn(nomeProduto, "\n")] = '\000';
 
     return nomeProduto;
 }

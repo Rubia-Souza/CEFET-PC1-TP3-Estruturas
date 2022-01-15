@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../../structs/Produto/ProdutoStruct.h"
 #include "../../structs/ListaProdutos/ListaProdutosStruct.h"
@@ -32,8 +33,9 @@ char* getNomeProdutosAlvo() {
     char* nomeProduto = (char*) malloc(TAMANHO_NOME_PRODUTO * sizeof(char));
 
     printf("\nInforme o nome do(s) produto(s) que será(ão) excluido(s): ");
-    scanf("%49s", nomeProduto);
+    fgets(nomeProduto, TAMANHO_NOME_PRODUTO, stdin);
     fflush(stdin);
+    nomeProduto[strcspn(nomeProduto, "\n")] = '\000';
 
     return nomeProduto;
 }

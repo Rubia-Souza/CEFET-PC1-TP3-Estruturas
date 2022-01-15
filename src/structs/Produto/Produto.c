@@ -38,7 +38,7 @@ Produto buildProdutoVazio() {
 
 char* produtoAsString(const Produto produto) {
     const char template[] = "Produto: %s, com código: %d. Preço: %f - Validade: %s.";
-    const int tamanho = sizeof(template);
+    const size_t tamanho = sizeof(template) + sizeof(produto);
 
     char* produtoString = (char*) malloc(tamanho * sizeof(char));
     sprintf(produtoString, template, produto.nome, produto.codigo, produto.preco, dataAsString(produto.validade));

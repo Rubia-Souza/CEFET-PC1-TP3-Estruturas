@@ -5,7 +5,7 @@
 #include "./utils.h"
 
 void toLower(char* referencia) {
-    const int tamanho = strlen(referencia);
+    const size_t tamanho = strlen(referencia);
     char* lowerString = (char*) malloc((tamanho + 1) * sizeof(char));
 
     int i = 0;

@@ -29,7 +29,7 @@ Data buildDataVazia() {
 
 char* dataAsString(const Data data) {
     const char template[] = "%d/%d/%d";
-    const int tamanho = sizeof(template);
+    const size_t tamanho = sizeof(template) + sizeof(Data);
 
     char* dataString = (char*) malloc(tamanho * sizeof(char));
 
