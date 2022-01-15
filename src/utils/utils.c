@@ -4,13 +4,15 @@
 
 #include "./utils.h"
 
-char* toLower(const char referencia[]) {
+void toLower(char* referencia) {
     const int tamanho = strlen(referencia);
-    char* lowerString = (char*) malloc(tamanho * sizeof(char));
+    char* lowerString = (char*) malloc((tamanho + 1) * sizeof(char));
 
-    for(int i = 0; i < tamanho; i++) {
+    int i = 0;
+    for(i = 0; i < tamanho; i++) {
         lowerString[i] = tolower(referencia[i]);
     }
+    lowerString[i] = '\000';
 
-    return lowerString;
+    strcpy(referencia, lowerString);
 }

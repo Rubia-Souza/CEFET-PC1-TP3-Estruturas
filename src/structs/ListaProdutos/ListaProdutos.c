@@ -181,11 +181,19 @@ void removerTodosProdutosComNome(ListaProdutos* lista, const char nome[TAMANHO_N
     if(estaVazia(lista)) {
         return;
     }
+    char nomeReferencia[TAMANHO_NOME_PRODUTO];
+    strcpy(nomeReferencia, nome);
+    toLower(nomeReferencia);
 
     Celula* iterator = getCelulaInicial(lista);
     for(Celula* item = iterator; item != lista->refFinal; item = iterator) {
         iterator = item->proxima;
-        bool produtoTemNomeIgual = !strcmp(toLower(item->produto.nome), toLower(nome));
+        char nomeProduto[TAMANHO_NOME_PRODUTO];
+        strcpy(nomeProduto, item->produto.nome);
+        toLower(nomeProduto);
+
+        bool produtoTemNomeIgual = !strcmp(nomeProduto, nomeReferencia);
+
         if(produtoTemNomeIgual) {
             removerCelula(item);
             lista->tamanho--;
@@ -218,9 +226,16 @@ ListaProdutos* getTodosProdutosComNome(const ListaProdutos* lista, const char no
     if(estaVazia(lista)) {
         return produtos;
     }
+    char nomeReferencia[TAMANHO_NOME_PRODUTO];
+    strcpy(nomeReferencia, nome);
+    toLower(nomeReferencia);
 
     for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = item->proxima) {
-        bool produtoTemNomeIgual = !strcmp(toLower(item->produto.nome), toLower(nome));
+        char nomeProduto[TAMANHO_NOME_PRODUTO];
+        strcpy(nomeProduto, item->produto.nome);
+        toLower(nomeProduto);
+        bool produtoTemNomeIgual = !strcmp(nomeProduto, nomeReferencia);
+
         if(produtoTemNomeIgual) {
             adicionarFim(produtos, item->produto);
         }
@@ -372,9 +387,16 @@ Celula* getCelulaPorNomeProduto(const ListaProdutos* lista, const char nome[TAMA
     if(estaVazia(lista)) {
         return NULL;
     }
+    char nomeReferencia[TAMANHO_NOME_PRODUTO];
+    strcpy(nomeReferencia, nome);
+    toLower(nomeReferencia);
 
     for(Celula* item = getCelulaInicial(lista); item != lista->refFinal; item = item->proxima) {
-        bool produtoTemNomeIgual = !strcmp(toLower(item->produto.nome), toLower(nome));
+        char nomeProduto[TAMANHO_NOME_PRODUTO];
+        strcpy(nomeProduto, item->produto.nome);
+        toLower(nomeProduto);
+
+        bool produtoTemNomeIgual = !strcmp(nomeProduto, nomeReferencia);
         if(produtoTemNomeIgual) {
             return item;
         }

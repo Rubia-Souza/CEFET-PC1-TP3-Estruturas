@@ -3,7 +3,7 @@
 
 #include "../Data/DataStruct.h"
 
-#define TAMANHO_NOME_PRODUTO 50
+#define TAMANHO_NOME_PRODUTO 51
 
 typedef struct Produto {
     unsigned int codigo;
