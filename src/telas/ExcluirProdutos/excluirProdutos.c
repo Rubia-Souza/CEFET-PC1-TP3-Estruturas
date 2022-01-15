@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../ExibirProdutos/exibirProdutos.h"
 #include "../../structs/Produto/ProdutoStruct.h"
 #include "../../structs/ListaProdutos/ListaProdutosStruct.h"
 
@@ -23,7 +22,7 @@ void excluirProdutos(ListaProdutos* lista) {
 
     removerTodosProdutosComNome(lista, nome);
     printf("\n---- Produtos que foram excluidos:\n");
-    renderizarListaProdutos(produtosDevemSerExcluidos); // TODO: Erro lista o header - Criar uma função que printa a lista
+    renderizarListaProdutos(produtosDevemSerExcluidos);
 
     destruir(produtosDevemSerExcluidos);
     return;

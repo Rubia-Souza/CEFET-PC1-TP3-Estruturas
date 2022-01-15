@@ -35,7 +35,10 @@ Produto getProdutoEm(ListaProdutos* lista, const unsigned int index);
 
 void limpar(ListaProdutos* lista);
 void destruir(ListaProdutos* lista);
+void ordernar(ListaProdutos* lista);
 
 bool estaVazia(const ListaProdutos* lista);
+
+void renderizarListaProdutos(const ListaProdutos* lista);
 
 #endif
