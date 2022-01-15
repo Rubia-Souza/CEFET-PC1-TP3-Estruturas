@@ -2,6 +2,7 @@
     "files.associations": {
         "celulalista.h": "c",
         "datastruct.h": "c",
-        "produtostruct.h": "c"
+        "produtostruct.h": "c",
+        "utils.h": "c"
     }
 }

@@ -23,6 +23,8 @@
                 "${fileDirname}\\telas\\ExibirProdutos\\*.c",
                 "${fileDirname}\\telas\\Menu\\*.h",
                 "${fileDirname}\\telas\\Menu\\*.c",
+                "${fileDirname}\\utils\\*.h",
+                "${fileDirname}\\utils\\*.c",
                 "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"

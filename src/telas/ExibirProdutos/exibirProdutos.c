@@ -4,20 +4,14 @@
 #include "../../structs/ListaProdutos/CelulaLista/CelulaListaStruct.h"
 #include "../../structs/ListaProdutos/ListaProdutosStruct.h"
 
-void renderizarListaProdutos(const ListaProdutos* lista) {
+void exibirProdutos(const ListaProdutos* lista) {
     if(estaVazia(lista)) {
         printf("\nNão há nenhum produto cadastrado");
         return;
     }
 
     printf("\n---- Lista de todos produtos cadastrados:\n");
-
-    int contador = 1;
-    for(Celula* item = lista->refComeco->proxima; item != lista->refFinal; item = item->proxima) {
-        Produto produto = item->produto;
-        printf("[%d] %s\n", contador, produtoAsString(produto));
-        contador++;
-    }
+    renderizarListaProdutos(lista);
 
     return;
 }

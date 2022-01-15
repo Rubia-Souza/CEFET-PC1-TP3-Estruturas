@@ -79,7 +79,7 @@ void casoAdicionar(ListaProdutos* lista) {
 }
 
 void casoExibirTodosProdutos(const ListaProdutos* lista) {
-    renderizarListaProdutos(lista);
+    exibirProdutos(lista);
     return;
 }
 
