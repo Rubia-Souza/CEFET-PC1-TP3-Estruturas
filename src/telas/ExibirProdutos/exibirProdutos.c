@@ -28,9 +28,9 @@ void exibirProdutoMaisCaro(const ListaProdutos* lista) {
         return;
     }
 
-    Produto produtoCaro = buildProdutoVazio();
+    Produto produtoCaro = getProdutoInicial(lista);
 
-    for(Celula* item = lista->refComeco->proxima; item != lista->refFinal; item = item->proxima) {
+    for(Celula* item = lista->refComeco->proxima->proxima; item != lista->refFinal; item = item->proxima) {
         Produto produtoAtual = item->produto;
         if(produtoCaro.preco < produtoAtual.preco) {
             produtoCaro = produtoAtual;
@@ -42,15 +42,15 @@ void exibirProdutoMaisCaro(const ListaProdutos* lista) {
     return;
 }
 
-void exibirProdutoMaisBarato(const ListaProdutos* lista) { // TODO: Erro produto vazio preço zero
+void exibirProdutoMaisBarato(const ListaProdutos* lista) {
     if(estaVazia(lista)) {
         printf("\nNão há nenhum produto cadastrado");
         return;
     }
 
-    Produto produtoBarato = buildProdutoVazio();
+    Produto produtoBarato = getProdutoInicial(lista);
 
-    for(Celula* item = lista->refComeco->proxima; item != lista->refFinal; item = item->proxima) {
+    for(Celula* item = lista->refComeco->proxima->proxima; item != lista->refFinal; item = item->proxima) {
         Produto produtoAtual = item->produto;
         if(produtoBarato.preco > produtoAtual.preco) {
             produtoBarato = produtoAtual;
