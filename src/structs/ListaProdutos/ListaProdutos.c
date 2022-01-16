@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 #include "../Produto/ProdutoStruct.h"
 #include "../../utils/utils.h"
@@ -17,6 +18,11 @@ Celula* getCelulaPorCodigoProduto(const ListaProdutos* lista, const unsigned int
 Celula* getCelulaEm(const ListaProdutos* lista, const unsigned int index);
 
 void removerCelula(Celula* alvo);
+
+void getProdutoPrioritario(Produto* prioritario, Produto* minoritario);
+void getProdutoPrioritarioPorNome(Produto* prioritario, Produto* minoritario);
+void getProdutoPrioritarioPorData(Produto* prioritario, Produto* minoritario);
+void getProdutoPrioritarioPorPreco(Produto* prioritario, Produto* minoritario);
 
 ListaProdutos* newListaProdutos() {
     ListaProdutos* lista = (ListaProdutos*) malloc(sizeof(ListaProdutos));
@@ -321,13 +327,56 @@ void ordernar(ListaProdutos* lista) {
 
     for(Celula* atual = getCelulaInicial(lista); atual != lista->refFinal; atual = atual->proxima) {
         for(Celula* iterador = atual->proxima; iterador != lista->refFinal; iterador = iterador->proxima) {
-            bool ehMenor = atual->produto.preco < iterador->produto.preco;
-            if(ehMenor) {
-                Produto troca = atual->produto;
-                atual->produto = iterador->produto;
-                iterador->produto = troca;
-            }
+            getProdutoPrioritario(&atual->produto, &iterador->produto);
         }
+    }
+
+    return;
+}
+
+void getProdutoPrioritario(Produto* prioritario, Produto* minoritario) {
+    getProdutoPrioritarioPorNome(prioritario, minoritario);
+    return;
+}
+
+void getProdutoPrioritarioPorNome(Produto* prioritario, Produto* minoritario) {
+    unsigned int nomeEhMenorAlfabeticamente = strcmp(prioritario->nome, minoritario->nome);
+    if(nomeEhMenorAlfabeticamente < 0) {
+        return;
+    }
+    else if(nomeEhMenorAlfabeticamente > 0) {
+        Produto maior = *prioritario;
+        *prioritario = *minoritario;
+        *minoritario = maior;
+    }
+    
+    getProdutoPrioritarioPorData(prioritario, minoritario);
+    return;
+}
+
+void getProdutoPrioritarioPorData(Produto* prioritario, Produto* minoritario) {
+    time_t tempoPrioritario = dataAsTimeT(prioritario->validade);
+    time_t tempoMinoritario = dataAsTimeT(minoritario->validade);
+
+    double tempoEntre = difftime(tempoPrioritario, tempoMinoritario);
+    if(tempoEntre < 0) {
+        return;
+    }
+    else if(tempoEntre > 0) {
+        Produto produtoValidadeProxima = *prioritario;
+        *prioritario = *minoritario;
+        *minoritario = *prioritario;
+    }
+
+    getProdutoPrioritarioPorPreco(prioritario, minoritario);
+    return;
+}
+
+void getProdutoPrioritarioPorPreco(Produto* prioritario, Produto* minoritario) {
+    if(prioritario->preco < minoritario->preco) {
+        Produto produtoPrecoMaior = *minoritario;
+        *prioritario = *minoritario;
+        *minoritario = *prioritario;
     }
 
     return;
