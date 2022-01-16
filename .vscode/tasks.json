@@ -25,6 +25,8 @@
                 "${fileDirname}\\telas\\Menu\\*.c",
                 "${fileDirname}\\utils\\*.h",
                 "${fileDirname}\\utils\\*.c",
+                "${fileDirname}\\mocks\\produtos\\*.h",
+                "${fileDirname}\\mocks\\produtos\\*.c",
                 "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
