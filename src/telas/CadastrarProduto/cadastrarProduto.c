@@ -130,7 +130,7 @@ unsigned int getAno() {
 
         inputErrado = !anoEhValido(ano);
         if(inputErrado) {
-            printf("\nPor favor, informe um ano válido: ");
+            printf("\nPor favor, informe um ano válido, sendo o mínimo %d: ", ANO_MINIMO);
         }
     } while(inputErrado);
     

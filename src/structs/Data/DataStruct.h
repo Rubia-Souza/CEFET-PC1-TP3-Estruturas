@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <time.h>
 
+#define ANO_MINIMO 1900
+
 typedef enum Meses {
     Janeiro = 1,
     Fevereiro = 2,

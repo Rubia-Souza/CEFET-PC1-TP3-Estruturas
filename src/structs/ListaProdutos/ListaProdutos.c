@@ -340,7 +340,7 @@ void getProdutoPrioritario(Produto* prioritario, Produto* minoritario) {
 }
 
 void getProdutoPrioritarioPorNome(Produto* prioritario, Produto* minoritario) {
-    unsigned int nomeEhMenorAlfabeticamente = strcmp(prioritario->nome, minoritario->nome);
+    int nomeEhMenorAlfabeticamente = strcmp(prioritario->nome, minoritario->nome);
     if(nomeEhMenorAlfabeticamente < 0) {
         return;
     }
@@ -348,6 +348,7 @@ void getProdutoPrioritarioPorNome(Produto* prioritario, Produto* minoritario) {
         Produto maior = *prioritario;
         *prioritario = *minoritario;
         *minoritario = maior;
+        return;
     }
     
     getProdutoPrioritarioPorData(prioritario, minoritario);
@@ -358,14 +359,19 @@ void getProdutoPrioritarioPorData(Produto* prioritario, Produto* minoritario) {
     time_t tempoPrioritario = dataAsTimeT(prioritario->validade);
     time_t tempoMinoritario = dataAsTimeT(minoritario->validade);
 
-    double tempoEntre = difftime(tempoPrioritario, tempoMinoritario);
-    if(tempoEntre < 0) {
+    time_t tempoAtual = time(NULL);
+    
+    double tempoPrioritarioAteHoje = abs(difftime(tempoPrioritario, tempoAtual));
+    double tempoMinoritarioAteHoje = abs(difftime(tempoMinoritario, tempoAtual));
+
+    if(tempoMinoritarioAteHoje > tempoPrioritarioAteHoje) {
         return;
     }
-    else if(tempoEntre > 0) {
+    else if(tempoMinoritarioAteHoje < tempoPrioritarioAteHoje) {
         Produto produtoValidadeProxima = *prioritario;
         *prioritario = *minoritario;
-        *minoritario = *prioritario;
+        *minoritario = produtoValidadeProxima;
+        return;
     }
 
     getProdutoPrioritarioPorPreco(prioritario, minoritario);
@@ -374,9 +380,9 @@ void getProdutoPrioritarioPorData(Produto* prioritario, Produto* minoritario) {
 
 void getProdutoPrioritarioPorPreco(Produto* prioritario, Produto* minoritario) {
     if(prioritario->preco < minoritario->preco) {
-        Produto produtoPrecoMaior = *minoritario;
+        Produto produtoPrecoMenor = *prioritario;
         *prioritario = *minoritario;
-        *minoritario = *prioritario;
+        *minoritario = produtoPrecoMenor;
     }
 
     return;

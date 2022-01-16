@@ -35,9 +35,9 @@ Data buildDataVazia() {
 }
 
 struct tm dataAsTm(const Data data) {
-    struct tm dataTm;
-    dataTm.tm_year = data.ano;
-    dataTm.tm_mon = data.mes;
+    struct tm dataTm = {0};
+    dataTm.tm_year = data.ano - ANO_MINIMO;
+    dataTm.tm_mon = data.mes - 1;
     dataTm.tm_mday = data.dia;
 
     return dataTm;
@@ -71,5 +71,5 @@ bool mesEhValido(const unsigned int mes) {
 }
 
 bool anoEhValido(const unsigned int ano) {
-    return (ano > 0);
+    return (ano > ANO_MINIMO);
 }
