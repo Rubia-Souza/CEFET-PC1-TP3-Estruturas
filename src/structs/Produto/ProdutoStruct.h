@@ -17,6 +17,7 @@ void setNome(Produto* produto, const char nome[TAMANHO_NOME_PRODUTO]);
 void setPreco(Produto* produto, const float preco);
 void setValidade(Produto* produto, const Data validade);
 
+Produto buildProduto(const unsigned int codigo, const char nome[TAMANHO_NOME_PRODUTO], const float preco, const Data valdiade);
 Produto buildProdutoVazio();
 char* produtoAsString(const Produto produto);
 

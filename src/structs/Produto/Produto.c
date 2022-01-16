@@ -26,13 +26,18 @@ void setValidade(Produto* produto, const Data validade) {
     setAno(&produto->validade, validade.ano);
 }
 
-Produto buildProdutoVazio() {
-    Produto vazio;
-    setCodigo(&vazio, 0);
-    setNome(&vazio, "");
-    setPreco(&vazio, 0);
-    setValidade(&vazio, buildDataVazia());
+Produto buildProduto(const unsigned int codigo, const char nome[TAMANHO_NOME_PRODUTO], const float preco, const Data valdiade) {
+    Produto novoProduto;
+    setCodigo(&novoProduto, codigo);
+    setNome(&novoProduto, nome);
+    setPreco(&novoProduto, preco);
+    setValidade(&novoProduto, valdiade);
 
+    return novoProduto;
+}
+
+Produto buildProdutoVazio() {
+    Produto vazio = buildProduto(0, "", 0.0, buildDataVazia());
     return vazio;
 }
 
