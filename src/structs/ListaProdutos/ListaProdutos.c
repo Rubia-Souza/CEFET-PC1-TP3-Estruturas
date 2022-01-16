@@ -319,7 +319,16 @@ void ordernar(ListaProdutos* lista) {
         return;
     }
 
-
+    for(Celula* atual = getCelulaInicial(lista); atual != lista->refFinal; atual = atual->proxima) {
+        for(Celula* iterador = atual->proxima; iterador != lista->refFinal; iterador = iterador->proxima) {
+            bool ehMenor = atual->produto.preco < iterador->produto.preco;
+            if(ehMenor) {
+                Produto troca = atual->produto;
+                atual->produto = iterador->produto;
+                iterador->produto = troca;
+            }
+        }
+    }
 
     return;
 }

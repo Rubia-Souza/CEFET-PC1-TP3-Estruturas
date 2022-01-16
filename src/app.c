@@ -100,6 +100,9 @@ void casoExcluirProduto(ListaProdutos* lista) {
 
 void casoOrdenarProdutos(ListaProdutos* lista) {
     // TODO: Implementar
+    ordernar(lista);
+    renderizarListaProdutos(lista);
+    return;
 }
 
 // TODO: Remover mock
