@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <stdbool.h>
+#include <time.h>
 
 typedef enum Meses {
     Janeiro = 1,
@@ -28,6 +29,7 @@ void setDia(Data* data, const unsigned int dia);
 void setMes(Data* data, const unsigned int mes);
 void setAno(Data* data, const unsigned int ano);
 
+Data buildData(const unsigned int dia, const unsigned int mes, const unsigned int ano);
 Data buildDataVazia();
 char* dataAsString(const Data data);
 
@@ -35,5 +37,8 @@ bool dataEhValida(const Data data);
 bool diaEhValido(const unsigned int dia);
 bool mesEhValido(const unsigned int mes);
 bool anoEhValido(const unsigned int ano);
+
+struct tm dataAsTm(const Data data);
+time_t dataAsTimeT(const Data data);
 
 #endif

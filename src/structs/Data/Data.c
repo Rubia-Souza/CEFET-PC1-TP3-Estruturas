@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
+
 #include "DataStruct.h"
 
 void setDia(Data* data, const unsigned int dia) {
@@ -18,13 +20,32 @@ void setAno(Data* data, const unsigned int ano) {
     return;
 }
 
-Data buildDataVazia() {
-    Data vazia;
-    setAno(&vazia, 0);
-    setMes(&vazia, 0);
-    setDia(&vazia, 0);
+Data buildData(const unsigned int dia, const unsigned int mes, const unsigned int ano) {
+    Data novaData;
+    setAno(&novaData, ano);
+    setMes(&novaData, mes);
+    setDia(&novaData, dia);
 
+    return novaData;
+}
+
+Data buildDataVazia() {
+    Data vazia = buildData(0, 0, 0);
     return vazia;
+}
+
+struct tm dataAsTm(const Data data) {
+    struct tm dataTm;
+    dataTm.tm_year = data.ano;
+    dataTm.tm_mon = data.mes;
+    dataTm.tm_mday = data.dia;
+
+    return dataTm;
+}
+
+time_t dataAsTimeT(const Data data) {
+    struct tm dataTm = dataAsTm(data);
+    return mktime(&dataTm);
 }
 
 char* dataAsString(const Data data) {
