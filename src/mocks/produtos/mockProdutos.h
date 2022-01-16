@@ -3,6 +3,6 @@
 
 #include "../../structs/ListaProdutos/ListaProdutosStruct.h"
 
-ListaProdutos getProdutosMock();
+ListaProdutos* getProdutosMock();
 
 #endif

@@ -17,6 +17,17 @@ ListaProdutos* getProdutosMock() {
     ));
 
     adicionarComeco(mocks, buildProduto(
+        990099,
+        "Elder Ring",
+        785.90,
+        buildData(
+            12,
+            11,
+            2022
+        )
+    ));
+
+    adicionarComeco(mocks, buildProduto(
         7263,
         "Cross Code",
         24.0,
@@ -24,6 +35,17 @@ ListaProdutos* getProdutosMock() {
             15,
             4,
             2015
+        )
+    ));
+
+    adicionarComeco(mocks, buildProduto(
+        788,
+        "A Bird History",
+        24.0,
+        buildData(
+            5,
+            11,
+            2014
         )
     ));
 
@@ -72,13 +94,13 @@ ListaProdutos* getProdutosMock() {
     ));
 
     adicionarComeco(mocks, buildProduto(
-        788,
-        "A Bird History",
-        24.0,
+        123874,
+        "Horizon Forbidden West",
+        200.1,
         buildData(
-            5,
-            11,
-            2014
+            18,
+            2,
+            2022
         )
     ));
 
@@ -88,17 +110,6 @@ ListaProdutos* getProdutosMock() {
         24.0,
         buildData(
             10,
-            12,
-            2015
-        )
-    ));
-
-    adicionarComeco(mocks, buildProduto(
-        791,
-        "A Bird History",
-        24.0,
-        buildData(
-            11,
             12,
             2015
         )
@@ -149,23 +160,23 @@ ListaProdutos* getProdutosMock() {
     ));
 
     adicionarComeco(mocks, buildProduto(
+        791,
+        "A Bird History",
+        24.0,
+        buildData(
+            11,
+            12,
+            2015
+        )
+    ));
+
+    adicionarComeco(mocks, buildProduto(
         9845,
         "Impostor Factory",
         450.87,
         buildData(
             22,
             2,
-            2022
-        )
-    ));
-    
-    adicionarComeco(mocks, buildProduto(
-        990099,
-        "Elder Ring",
-        785.90,
-        buildData(
-            12,
-            11,
             2022
         )
     ));
@@ -182,7 +193,7 @@ ListaProdutos* getProdutosMock() {
     ));
 
     adicionarComeco(mocks, buildProduto(
-        123874,
+        124325315,
         "Horizon Forbidden West",
         9802.1,
         buildData(
@@ -192,16 +203,7 @@ ListaProdutos* getProdutosMock() {
         )
     ));
 
-    adicionarComeco(mocks, buildProduto(
-        123874,
-        "Horizon Forbidden West",
-        200.1,
-        buildData(
-            18,
-            2,
-            2022
-        )
-    ));
+    
 
     return mocks;
 }
