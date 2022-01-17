@@ -61,9 +61,9 @@ ListaProdutos* getProdutosMock() {
     ));
 
     adicionarComeco(mocks, buildProduto(
-        4,
+        5,
         "God of War 2018",
-        150.0,
+        200.0,
         buildData(
             20,
             4,
@@ -90,6 +90,17 @@ ListaProdutos* getProdutosMock() {
             24,
             3,
             2015
+        )
+    ));
+
+    adicionarComeco(mocks, buildProduto(
+        90,
+        "To The Moon",
+        24.0,
+        buildData(
+            5,
+            12,
+            2018
         )
     ));
 
@@ -127,6 +138,17 @@ ListaProdutos* getProdutosMock() {
     ));
 
     adicionarComeco(mocks, buildProduto(
+        7274,
+        "Cross Code",
+        30.0,
+        buildData(
+            20,
+            2,
+            2022
+        )
+    ));
+
+    adicionarComeco(mocks, buildProduto(
         589,
         "Dark Souls",
         250.0,
@@ -160,6 +182,17 @@ ListaProdutos* getProdutosMock() {
     ));
 
     adicionarComeco(mocks, buildProduto(
+        7,
+        "Dark Souls III",
+        120.0,
+        buildData(
+            24,
+            3,
+            2016
+        )
+    ));
+
+    adicionarComeco(mocks, buildProduto(
         791,
         "A Bird History",
         24.0,
@@ -178,6 +211,17 @@ ListaProdutos* getProdutosMock() {
             22,
             2,
             2022
+        )
+    ));
+
+    adicionarComeco(mocks, buildProduto(
+        4,
+        "God of War 2018",
+        150.0,
+        buildData(
+            20,
+            4,
+            2018
         )
     ));
 
